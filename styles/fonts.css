@@ -1,0 +1,8 @@
+@font-face {
+  font-family: CyberGen;
+  src: url(./font/CYBERGEN.TTF) format("TrueType");
+}
+@font-face {
+  font-family: Cybertronic;
+  src: url(./font/ModernCybertronic.otf) format("OpenType");
+}
