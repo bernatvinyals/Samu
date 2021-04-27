@@ -59,15 +59,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Log In - Samu</title>
+		<title>Register - Samu</title>
 		<meta charset="utf-8">
 	</head>
 	<body>
 		 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<input type="text" name="username">
-			<input type="password" name="password">
-			<input type="submit" name="" value="Log In">
+			<input type="text" name="username" required>
+			<input type="password" name="password" required>
+			<input type="email" name="email" required>
+			<input type="submit" name="" value="Register">
 		</form>
-		<p>Don't have an account? <a href="register.php">Register right here</a></p>
 	</body>
 </html>
