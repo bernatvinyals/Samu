@@ -18,9 +18,7 @@
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"])) {
-			$USERNAME = "root";
-			$PASSWORD = "";
-			$SERVER = "localhost:3306";
+			include "globals.php";
 			$conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 
 			mysqli_select_db($conn, "db_sumus");

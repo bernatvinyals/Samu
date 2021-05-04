@@ -31,13 +31,14 @@
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["username"]) && isset($_POST["password"]) && $_SESSION["login"] != true) {
-			$USERNAME = "root";
-			$PASSWORD = "";
-			$SERVER = "localhost:3306";
+			include "globals.php";
 			$conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 
 			mysqli_select_db($conn, "db_sumus");
 
+
+
+//Check login
 			$queryusername = test_input($_POST["username"]);
 			$querypassword = test_input($_POST["password"]);
 
@@ -50,14 +51,29 @@
 			$row = mysqli_fetch_assoc($result);
 
 
+
+//Save Player Var if login = true
 			if (mysqli_num_rows($result) >=1){	
 				if ($row["verified"]==0) {
 					header("Location: login.php");
 					die();
 				}
+				//Grab player currency info
+				$resultInfo = mysqli_query($conn, 'SELECT curxp.rep, curxp.credits, curxp.tokens, curxp.albums FROM (curxp INNER JOIN users ON users.username = "'.$queryusername.'");');
+				if (!$resultInfo) {
+					echo "Error:".mysqli_error($conn);
+					header("Location: login.php");
+					die();
+				}
+				$rowInfo = mysqli_fetch_assoc($resultInfo);
+
+
 				$_SESSION["username"] = $_POST["username"];
 				$_SESSION["userID"] = $row["userID"];
 				$_SESSION["avatarID"] = $row["avatarID"];
+				$_SESSION["tokens"] = $rowInfo["tokens"];
+				$_SESSION["credits"] = $rowInfo["credits"];
+				$_SESSION["albums"] = $rowInfo["albums"];
 				$_SESSION["login"] = true;
 			}
 			mysqli_free_result($result);
@@ -90,7 +106,7 @@
 		 	<label>Username:</label>
 			<input type="text" name="username" required maxlength="12" minlength="4">
 			<label>Password:</label>
-			<input type="password" name="password" required minlength="8" maxlength="25">
+			<input type="password" name="password" required  maxlength="25">
 			<input type="submit" name="" value="Log In">
 			<p>Don't have an account? <a href="register.php">Register right here</a></p>
 		</form>
