@@ -38,13 +38,19 @@ function buyRequest(elID) {
 		
 }
 function getInfoOf(elID){
+	document.getElementById("obj-info").innerHTML = "";
+	storeHUD.style.display = "none";
+	storeButton.style = "background-color: var(--idleSidebar);";
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 2) {
-		document.getElementById("obj-info").innerHTML = "<p>Getting INFO</p>";
+		if (this.readyState == 1) {
+			showLoading();
+		}
+		if (this.readyState == 2 ||this.readyState == 3) {
+			hideLoading();
 		}
 		if (this.readyState == 4 && this.status == 200) {
-		document.getElementById("obj-info").innerHTML = this.responseText;
+			document.getElementById("obj-info").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "itemInfo.php?id="+elID+"", true);

@@ -28,6 +28,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="./styles/fonts.css">
 		<link rel="stylesheet" type="text/css" href="./styles/game.css">
+		<link rel="stylesheet" type="text/css" href="./styles/loading.css">
+		<script type="text/javascript" src="./js/loading.js"></script>
 		<script type="text/javascript" src="./js/sidebarActions.js"></script>
 	</head>
 	<body onload="setVarSidebar();">
@@ -45,10 +47,22 @@
 				<input type="button"  id="Settings" value="Settings" onclick="setHudActive(this)">
 				<div id="obj-info" class="obj-info">
 				</div>
+				<div id="spinner-front">
+					<div id="floatingCirclesG">
+						<div class="f_circleG" id="frotateG_01"></div>
+						<div class="f_circleG" id="frotateG_02"></div>
+						<div class="f_circleG" id="frotateG_03"></div>
+						<div class="f_circleG" id="frotateG_04"></div>
+						<div class="f_circleG" id="frotateG_05"></div>
+						<div class="f_circleG" id="frotateG_06"></div>
+						<div class="f_circleG" id="frotateG_07"></div>
+						<div class="f_circleG" id="frotateG_08"></div>
+					</div>
+				</div>
 			</div>
 			<div id="shopHUD" class="shop-container" style="display:none;">
 				<?php 
-				for ($i=0; $i < 6; $i++) { 
+				for ($i=0; $i < 4; $i++) { 
 					echo "<button "." id='".$i."00"."' class='shop-item' onclick='getInfoOf(".$i.")'>"."</button>";
 				} ?>
 			</div>
@@ -57,7 +71,7 @@
 		<div class="game">
 			<div class="grid-container">
 				<?php 
-				for ($i=0; $i < 12; $i++) { 
+				for ($i=0; $i < 9; $i++) { 
 					echo "<button "." id='".$i."' class='grid-item' onclick='isHudActive(".$i.")'>"."</button>";
 				} ?>
 

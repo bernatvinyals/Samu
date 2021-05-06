@@ -10,10 +10,16 @@
 body {
   margin: 0;
 }
+#hud{
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
 
 .topnav {
   font-family: CyberGen, sans-serif;
   overflow: hidden;
+  height: 44px;
   background-color: #333;
 }
 
@@ -29,7 +35,7 @@ body {
 .topnav div
 {   
   color: white; 
-  padding-bottom: 13px;
+  padding-bottom: 10px;
 }
 .topnav input:hover {
   background-color: #ddd;
@@ -39,12 +45,11 @@ body {
   color: white;
   font-family: CyberGen, sans-serif;
   height: 100%;
-  width: 270px;
-  position: fixed;
-  top: 45px;
+  width: 232px;
   left: 0;
   background-color: #111;
-  overflow-x: hidden;
+  overflow: hidden;
+  float: left;
 }
 
 .sidenav input {
@@ -63,18 +68,19 @@ body {
   color: black;
 }
 
-
 .game {
   z-index: -2;
   font-family: CyberGen, sans-serif;
-  margin-left: 270px;
-  padding-left: 20px;
+  float: left;
+  position: absolute;
+  left: 232px;
+  top: 44px;
 }
 .grid-container {
   background-color: #2196F3;
   padding: 10px;
   display: grid;
-  grid-template-columns: 200px 200px 200px 200px;
+  grid-template-columns: 200px 200px 200px;
   width: max-content;
 }
 .grid-item {
@@ -87,11 +93,11 @@ body {
 
 .shop-container {
   background-color: #2196F3;
-  margin-left: 270px;
+  margin-left: 232px;
   display: grid;
   position: absolute;
   z-index: 1;
-  grid-template-columns: 100px 100px 100px;
+  grid-template-columns: 100px 100px;
   width: max-content;
   box-shadow: 31px 0px 103px -13px black;
 }
