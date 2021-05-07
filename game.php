@@ -33,7 +33,7 @@
 		<script type="text/javascript" src="./js/sidebarActions.js"></script>
 	</head>
 	<body onload="setVarSidebar();">
-		<div id="hud">
+		<div id="main">
 			<div class="topnav">
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
 				<div><?php echo $_SESSION["username"]; ?></div>
@@ -60,21 +60,20 @@
 					</div>
 				</div>
 			</div>
+			<div class="game">
+				<div class="grid-container">
+					<?php 
+					for ($i=0; $i < 9; $i++) { 
+						echo "<button "." id='".$i."' class='grid-item' onclick='getInfoOf(".($i+9999).")'>"."</button>";
+					} ?>
+
+				</div>
+			</div>
 			<div id="shopHUD" class="shop-container" style="display:none;">
 				<?php 
 				for ($i=0; $i < 4; $i++) { 
 					echo "<button "." id='".$i."00"."' class='shop-item' onclick='getInfoOf(".$i.")'>"."</button>";
 				} ?>
-			</div>
-		</div>
-
-		<div class="game">
-			<div class="grid-container">
-				<?php 
-				for ($i=0; $i < 9; $i++) { 
-					echo "<button "." id='".$i."' class='grid-item' onclick='isHudActive(".$i.")'>"."</button>";
-				} ?>
-
 			</div>
 		</div>
 	</body>

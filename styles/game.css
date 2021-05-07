@@ -10,10 +10,11 @@
 body {
   margin: 0;
 }
-#hud{
+#main{
   height: 100%;
   position: fixed;
   width: 100%;
+  z-index: 0;
 }
 
 .topnav {
@@ -43,8 +44,8 @@ body {
 }
 .sidenav {
   color: white;
-  font-family: CyberGen, sans-serif;
-  height: 100%;
+   /*font-family: CyberGen, sans-serif;
+  */ height: 100%;
   width: 232px;
   left: 0;
   background-color: #111;
@@ -69,7 +70,7 @@ body {
 }
 
 .game {
-  z-index: -2;
+  z-index: 1;
   font-family: CyberGen, sans-serif;
   float: left;
   position: absolute;
@@ -96,7 +97,7 @@ body {
   margin-left: 232px;
   display: grid;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   grid-template-columns: 100px 100px;
   width: max-content;
   box-shadow: 31px 0px 103px -13px black;

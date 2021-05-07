@@ -53,6 +53,8 @@ function getInfoOf(elID){
 			document.getElementById("obj-info").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", "itemInfo.php?id="+elID+"", true);
+	if (elID >9999) {
+		xhttp.open("GET", "itemInfo.php?id="+(elID-9999)+"&hasToUpgrade=1", true);
+	}else{	xhttp.open("GET", "itemInfo.php?id="+elID+"", true);}
 	xhttp.send();
 }
