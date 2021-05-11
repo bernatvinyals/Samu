@@ -69,7 +69,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 $fecha = date_create();
-$result = mysqli_query($conn, 'INSERT INTO playerhasbuild (userID, bID, bLvl, bPos, isUpgrading, timestampSec) VALUES (0, 1, 1, 2, 0, '.date_timestamp_get($fecha)).'');
+$result = mysqli_query($conn, 'INSERT INTO playerhasbuild (userID, bID, bLvl, bPos, isUpgrading, timestampSec) VALUES (0, 1, 1, 2, 0, '.date_timestamp_get($fecha).'');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
