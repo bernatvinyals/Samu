@@ -64,7 +64,7 @@
 				<div class="grid-container">
 					<?php 
 					for ($i=0; $i < 9; $i++) { 
-						echo "<button "." id='".$i."' class='grid-item' onclick='getInfoOf(".($i+9999).")'>"."</button>";
+						echo "<button "." id='".$i."' class='grid-item' onclick='getInfoOf(".($i+10000).")'>"."</button>";
 					} ?>
 
 				</div>

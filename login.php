@@ -55,7 +55,7 @@
 //Save Player Var if login = true
 			if (mysqli_num_rows($result) >=1){	
 				if ($row["verified"]==0) {
-					header("Location: login.php");
+					header("Location: login.php");//TODO vefification page
 					die();
 				}
 				//Grab player currency info

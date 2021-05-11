@@ -1,4 +1,4 @@
-<?php 
+	<?php 
 //DATABASE SERVER SETUP WITH A DEFAULT ADMIN ACCOUNT
 $USERNAME = "root";
 $PASSWORD = "";
@@ -33,7 +33,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
+$result = mysqli_query($conn, 'CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, isUpgrading INT, timestampSec TIMESTAMP,FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
@@ -68,10 +68,13 @@ if (!$result) {
 	die();
 }
 mysqli_free_result($result);
-
-
-
-
+$fecha = date_create();
+$result = mysqli_query($conn, 'INSERT INTO playerhasbuild (userID, bID, bLvl, bPos, isUpgrading, timestampSec) VALUES (0, 1, 1, 2, 0, '.date_timestamp_get($fecha)).'');
+if (!$result) {
+	echo "Error:".mysqli_error($conn);
+	die();
+}
+mysqli_free_result($result);
 
 
 
@@ -85,7 +88,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO curxp (userID, rep, credits, tokens, albums) VALUES (0, 10, 200, 3, 150);');
+$result = mysqli_query($conn, 'INSERT INTO curxp (userID, rep, credits, tokens, albums) VALUES (1, 10, 200, 3, 150);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();

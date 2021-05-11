@@ -34,9 +34,35 @@ function setHudActive(obj) {
 	}
 	console.log("ok");
 }
-function buyRequest(elID) {
-		
+function buyByIndex(elID) {
+	document.getElementById("obj-info").innerHTML = "";
+	storeHUD.style.display = "none";
+	storeButton.style = "background-color: var(--idleSidebar);";
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 1) {
+			showLoading();
+		}
+		if (this.readyState == 2 ||this.readyState == 3) {
+			hideLoading();
+		}
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("obj-info").innerHTML = this.responseText;
+		}
+		if (this.readyState == 4 && this.status != 200) {
+			document.getElementById("obj-info").innerHTML = "Connection lost, try Refreshing the page.";
+		}
+	};
+	xhttp.open("GET", "buyBuilding.php?id="+elID+"", true);
+	xhttp.send();
 }
+
+function upgradeByIndex(elID){
+	//AJAX ask for upgradeBuilding.php?pos=X&nextLVL=Y;
+}
+
+
+
 function getInfoOf(elID){
 	document.getElementById("obj-info").innerHTML = "";
 	storeHUD.style.display = "none";
@@ -51,6 +77,9 @@ function getInfoOf(elID){
 		}
 		if (this.readyState == 4 && this.status == 200) {
 			document.getElementById("obj-info").innerHTML = this.responseText;
+		}
+		if (this.readyState == 4 && this.status != 200) {
+			document.getElementById("obj-info").innerHTML = "Connection lost, try Refreshing the page.";
 		}
 	};
 	if (elID >9999) {
