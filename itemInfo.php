@@ -15,12 +15,14 @@ echo "Input: ".$_GET["id"]."<BR>";
 if (!isset($_GET["hasToUpgrade"])) {
 	$gridSelect=false;
 }else{
+	echo "Is grid = TRUE<br>";
 	$gridSelect=true;
 	//Checks if there's a building in the game, if there is we get it's id and show it's next level
 	//If there isn't we Display that there's nothing in there and that the player should buy a building
 	$resultInfo = mysqli_query($conn, 'SELECT bID, max(bLvl) FROM playerhasbuild WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
 
 	$rowInfo = mysqli_fetch_assoc($resultInfo);
+	echo "".print_r($resultInfo)."<br>";
 	if (!$resultInfo) {
 		die("You must log in first to perform this action.");
 	}
