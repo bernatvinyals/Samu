@@ -33,7 +33,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, isUpgrading INT, timestampSec DATETIME DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
+$result = mysqli_query($conn, 'CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, isUpgrading INT, timestampSec TIMESTAMP NOT NULL,FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
@@ -41,35 +41,35 @@ if (!$result) {
 mysqli_free_result($result);
 
 //BUILDING INSERTS
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (0,"Studio",0,1,0,10,0,300)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (1,"Studio",0,1,0,10,0,300)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (1,"Merch Store",100,1,100,30,0,800)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (2,"Merch Store",100,1,100,30,0,800)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (2,"Museum",600,1,600,200,0,5000)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (3,"Museum",600,1,600,200,0,5000)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (3, "Tower",5600,1,1000,46,0,5000)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (4, "Tower",5600,1,1000,46,0,5000)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 $fecha = date_create();
-$result = mysqli_query($conn, 'INSERT INTO playerhasbuild (userID, bID, bLvl, bPos, isUpgrading) VALUES (1, 1, 1, 2, 0)');
+$result = mysqli_query($conn, 'INSERT INTO playerhasbuild (userID, bID, bLvl, bPos, isUpgrading, timestampSec) VALUES (1, 2, 1, 2, 0, SYSDATE())');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();

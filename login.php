@@ -58,22 +58,10 @@
 					header("Location: login.php");//TODO vefification page
 					die();
 				}
-				//Grab player currency info
-				$resultInfo = mysqli_query($conn, 'SELECT curxp.rep, curxp.credits, curxp.tokens, curxp.albums FROM (curxp INNER JOIN users ON users.username = "'.$queryusername.'");');
-				if (!$resultInfo) {
-					echo "Error:".mysqli_error($conn);
-					header("Location: login.php");
-					die();
-				}
-				$rowInfo = mysqli_fetch_assoc($resultInfo);
-
 
 				$_SESSION["username"] = $_POST["username"];
 				$_SESSION["userID"] = $row["userID"];
 				$_SESSION["avatarID"] = $row["avatarID"];
-				$_SESSION["tokens"] = $rowInfo["tokens"];
-				$_SESSION["credits"] = $rowInfo["credits"];
-				$_SESSION["albums"] = $rowInfo["albums"];
 				$_SESSION["login"] = true;
 			}
 			mysqli_free_result($result);

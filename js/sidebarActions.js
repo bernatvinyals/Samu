@@ -1,9 +1,13 @@
+var credits= 0;
+var albums = 0;
+var tokens = 0;
 var storeButton;
 var upgradesButton;
 var settingsButton;
 var storeHUD;
 var upgradesHUD;
 var settingsHUD;
+var buyPos=0;
 function setVarSidebar(){
 	storeButton = document.getElementById("Buildings");
 	upgradesButton = document.getElementById("Upgrades");
@@ -53,7 +57,7 @@ function buyByIndex(elID) {
 			document.getElementById("obj-info").innerHTML = "Connection lost, try Refreshing the page.";
 		}
 	};
-	xhttp.open("GET", "buyBuilding.php?id="+elID+"", true);
+	xhttp.open("GET", "buyBuilding.php?id="+elID+"&pos="+buyPos, true);
 	xhttp.send();
 }
 
@@ -61,7 +65,9 @@ function upgradeByIndex(elID){
 	//AJAX ask for upgradeBuilding.php?pos=X&nextLVL=Y;
 }
 
-
+function updateINFO() {
+	// body...
+}
 
 function getInfoOf(elID){
 	document.getElementById("obj-info").innerHTML = "";

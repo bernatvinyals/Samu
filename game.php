@@ -15,9 +15,9 @@
 			die();
 		}
 	$rowInfo = mysqli_fetch_assoc($resultInfo);
-	$_SESSION["tokens"] = $rowInfo["tokens"];
-	$_SESSION["credits"] = $rowInfo["credits"];
-	$_SESSION["albums"] = $rowInfo["albums"];
+	$tokens = $rowInfo["tokens"];
+	$credits = $rowInfo["credits"];
+	$albums= $rowInfo["albums"];
 	mysqli_free_result($resultInfo);
 	mysqli_close($conn);
 ?>
@@ -31,15 +31,23 @@
 		<link rel="stylesheet" type="text/css" href="./styles/loading.css">
 		<script type="text/javascript" src="./js/loading.js"></script>
 		<script type="text/javascript" src="./js/sidebarActions.js"></script>
+		<script type="text/javascript">
+			<?php 
+			echo "credits = ".$credits.";";
+			echo "albums = ".$albums.";";
+			echo "tokens = ".$tokens.";";
+			 ?>
+		</script>
+
 	</head>
 	<body onload="setVarSidebar();">
 		<div id="main">
 			<div class="topnav">
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
 				<div><?php echo $_SESSION["username"]; ?></div>
-				<div>Tokens: <?php echo $_SESSION["tokens"]; ?></div>
-				<div>Credits: <?php echo $_SESSION["credits"]; ?></div>
-				<div>Albums: <?php echo $_SESSION["albums"]; ?></div>
+				<div>Tokens: <?php echo $tokens; ?></div>
+				<div>Credits: <?php echo $credits; ?></div>
+				<div>Albums: <?php echo $albums; ?></div>
 			</div>
 			<div class="sidenav">
 				<input type="button"  id="Buildings" value="Buildings" onclick="setHudActive(this)">
@@ -47,6 +55,7 @@
 				<input type="button"  id="Settings" value="Settings" onclick="setHudActive(this)">
 				<div id="obj-info" class="obj-info">
 				</div>
+
 				<div id="spinner-front">
 					<div id="floatingCirclesG">
 						<div class="f_circleG" id="frotateG_01"></div>

@@ -91,7 +91,19 @@ body {
   padding-top: 100%; /* 1:1 Aspect Ratio */
   border:1px solid black;
 }
-
+.posSelector-container {
+  background-color: #2196F3;
+  display: grid;
+  z-index: 2;
+  grid-template-columns: 77.3px 77.3px 77.3px;
+  width: max-content;
+}
+.posSelector-item {
+  background-color: red;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  border:1px solid black;
+}
 .shop-container {
   background-color: #2196F3;
   margin-left: 232px;

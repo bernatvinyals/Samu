@@ -42,7 +42,7 @@ if ($notInGrid) {
 
 //OUTPUT INFO IN CASE THAT THERE'S SOMETHING IN GRID OR THAT THE ITEM SELECTED EXISTS
 if ($gridSelect == false) {
-	$resultInfo = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee FROM buildings WHERE bID = "'.$_GET["id"].'"');
+	$resultInfo = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee FROM buildings WHERE bID = "'.($_GET["id"]+1).'"');
 	$rowInfo = mysqli_fetch_assoc($resultInfo);
 	echo "<p>Name:".$rowInfo["bName"]."</p>";
 } else {
@@ -62,6 +62,11 @@ if ($gridSelect == false) {
 
 echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."<br>  Tokens: ".$rowInfo["tokens"]."</p>";
 if ($gridSelect == false) {
+	echo '<div class="posSelector-container">';
+	for ($i=1; $i < 10; $i++) { 
+		echo "<button class='posSelector-item' onclick='buyPos=".$i."; console.log(".$i.")'>"."</button>";
+	}
+	echo "</div>";
 	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].')" name="buy">';
 }else {
 	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*$GLOBALS["nextLvl"]*1.2).' Credits)" onclick="upgradeByIndex('.$GLOBALS["selected"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
