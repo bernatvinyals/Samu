@@ -88,7 +88,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO curxp (userID, rep, credits, tokens, albums) VALUES (1, 10, 200, 3, 150);');
+$result = mysqli_query($conn, 'INSERT INTO curxp (userID, rep, credits, tokens, albums) VALUES (1, 1000, 900, 9, 150);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();

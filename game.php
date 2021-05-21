@@ -38,16 +38,17 @@
 			echo "tokens = ".$tokens.";";
 			 ?>
 		</script>
-
 	</head>
-	<body onload="setVarSidebar();">
+	<body onload="setVarSidebar();updateINFO();">
 		<div id="main">
 			<div class="topnav">
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
 				<div><?php echo $_SESSION["username"]; ?></div>
-				<div>Tokens: <?php echo $tokens; ?></div>
-				<div>Credits: <?php echo $credits; ?></div>
-				<div>Albums: <?php echo $albums; ?></div>
+				<div id="userInfo" style="padding:0px;">
+					<div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
+					<div id="creditsCount">Credits: <?php echo $credits; ?></div>
+					<div id="albumsCount">Albums: <?php echo $albums; ?></div>
+				</div>
 			</div>
 			<div class="sidenav">
 				<input type="button"  id="Buildings" value="Buildings" onclick="setHudActive(this)">
@@ -85,6 +86,7 @@
 				} ?>
 			</div>
 		</div>
+		<div id="addins" style="display:none;"></div>
 	</body>
 	<footer>
 		

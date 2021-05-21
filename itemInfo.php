@@ -69,7 +69,7 @@ if ($gridSelect == false) {
 	echo "</div>";
 	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].')" name="buy">';
 }else {
-	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*$GLOBALS["nextLvl"]*1.2).' Credits)" onclick="upgradeByIndex('.$GLOBALS["selected"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
+	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*$GLOBALS["nextLvl"]*1.2).' Credits)" onclick="upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
 }
 
 

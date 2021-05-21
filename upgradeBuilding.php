@@ -9,52 +9,58 @@ $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
 echo "Input: Pos: ".$_GET["id"]."<BR>";
 $resultUpgrade = mysqli_query($conn, 'SELECT bID, max(bLvl), bLvl FROM playerhasbuild WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
-$resultUpgradeCheck = mysqli_fetch_assoc($resultBuy);
 if (!$resultUpgrade) {
 	die("You must log in first to perform this action.");
 }
-if(mysqli_num_rows($resultUpgradeCheck) >=1){
+$resultUpgradeCheck = mysqli_fetch_assoc($resultUpgrade);
+if(mysqli_num_rows($resultUpgrade) >=1){
 
-	$playerREP;
-	$playerTotalCredits;
-	GetResources($conn, $playerREP, $playerTotalCredits);
-	if (mysqli_num_rows($resultInfo) >=1 && $rowInfo["bID"] >= 1){
-		echo print_r($rowInfo);
-		$GLOBALS["nextLvl"] = $resultUpgradeCheck["max(bLvl)"]+1;
-
-
-		$resultBuy = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, dailyFee FROM buildings WHERE bID = "'.($resultUpgradeCheck["bID"]+1).'"');
+	$playerREP =0 ;
+	$playerTotalCredits=0;
+	$playerIndividualCredits=0;
+	$check1=GetResources($conn, $playerREP, $playerTotalCredits, $playerIndividualCredits);
+	echo $playerREP." ".$playerTotalCredits;
+	echo "--".print_r($resultUpgradeCheck);
+	if ($check1 && $resultUpgradeCheck["bID"] >= 1){
+		$resultBuy = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, dailyFee FROM buildings WHERE bID = "'.($resultUpgradeCheck["bID"]).'"');
 		$resultBuyCheck = mysqli_fetch_assoc($resultBuy);
 		if (!$resultBuy) {
 			die("You must log in first to perform this action.");
 		}
-		if ($playerTotalCredits>=($resultBuyCheck["dailyFee"]*$GLOBALS["nextLvl"]*1.2)) {
+		if ($playerTotalCredits>=($resultBuyCheck["dailyFee"]*$_GET["lvl"]*1.2)) {
 			//BUY/Alter
 
-			
+			$resultUpgrded = mysqli_query($conn, 'UPDATE playerhasbuild SET bLvl = '.($resultUpgradeCheck["bID"]+1).' WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
+			if (!$resultUpgrded) {
+				die("You must log in first to perform this action.");
+			}
 
-			$minusTokens=floor($resultBuyCheck["dailyFee"]/1000);
-			$minusCredits=$resultBuyCheck["dailyFee"]%1000;
-			if ($rowResources["credits"]-$minusCredits<0){
+			$minusTokens=floor(($resultBuyCheck["dailyFee"]*1.2)/1000);
+			$minusCredits=($resultBuyCheck["dailyFee"]*1.2)%1000;
+			if ($playerIndividualCredits-$minusCredits<0){
 				$minusTokens +=1;
-				$minusCredits = ($rowResources["credits"]+1000)-$minusCredits;
+				$minusCredits = ($playerIndividualCredits+1000)-$minusCredits;
 				AlterResources($conn,$minusCredits,$minusTokens,true);
 			}
 			else{
 				AlterResources($conn,$minusCredits,$minusTokens,false);
 			}
+
 			echo "Congrats! <br>You just Bought a ".$resultBuyCheck["bName"];
 		}
 	}
 }
-function GetResources ($conn, $outRep, $outTotalCredits){
+function GetResources ($conn, &$outRep, &$outTotalCredits, &$individualCredits){
 	$resultResources = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curxp  WHERE userID = "'.$_SESSION["userID"].'";');
 	if (!$resultResources) {
 		die("Error:".mysqli_error($conn));
+		return fasle;
 	}
 	$rowResources = mysqli_fetch_assoc($resultResources);
 	$outRep = $rowResources["rep"];
+	$individualCredits = $rowResources["credits"];
 	$outTotalCredits=$rowResources["credits"]+($rowResources["tokens"]*1000);
+	return true;
 }
 function AlterResources($conn,$credits,$tokens,$isNegative)
 {
