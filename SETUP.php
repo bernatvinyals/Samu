@@ -33,7 +33,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, isUpgrading INT, timestampSec TIMESTAMP NOT NULL,FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
+$result = mysqli_query($conn, 'CREATE TABLE playerhasbuild (userID INT, bID INT, bLvl INT, bPos INT, isUpgrading INT, timestampSec TIMESTAMP NOT NULL,FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
