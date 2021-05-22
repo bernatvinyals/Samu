@@ -19,7 +19,7 @@
 	$credits = $rowInfo["credits"];
 	$albums= $rowInfo["albums"];
 	mysqli_free_result($resultInfo);
-	mysqli_close($conn);
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,8 +74,18 @@
 				<div class="grid-container">
 					<?php 
 					for ($i=0; $i < 9; $i++) { 
-						echo "<button "." id='".$i."' class='grid-item' onclick='getInfoOf(".($i+10000).")'>"."</button>";
-					} ?>
+						$resultInfo = mysqli_query($conn, 'SELECT bID, bPos FROM playerhasbuild WHERE userID = "'.$_SESSION["userID"].'" AND bPos='.$i.'' );
+						if (!is_null($resultInfo)) {
+							$rowInfo = mysqli_fetch_assoc($resultInfo);
+						} 
+						if ($rowInfo["bID"] > 0 && $rowInfo["bPos"]==$i) {
+							echo "<button "." id='".$i."' class='grid-item' style='background-image: url("."./img/".$rowInfo["bID"]."_building.png)'"." onclick='getInfoOf(".($i+10000).")'>"."</button>";
+						}else{
+							echo "<button alt="."".$rowInfo["bID"]."  ".$rowInfo["bPos"]." "." id='".$i."' class='grid-item' style='background-image: url("."./img/0_building.png".");' onclick='getInfoOf(".($i+10000).")'>"."</button>";
+						}
+						mysqli_free_result($resultInfo);
+					} 
+					?>
 
 				</div>
 			</div>
@@ -89,6 +99,6 @@
 		<div id="addins" style="display:none;"></div>
 	</body>
 	<footer>
-		
 	</footer>
 </html>
+<?php mysqli_close($conn); ?>
