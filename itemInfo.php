@@ -17,6 +17,7 @@ if (!isset($_GET["hasToUpgrade"])) {
 }else{
 	echo "Is grid = TRUE<br>";
 	$gridSelect=true;
+	$_GET["id"]=$_GET["id"]-1;
 	//Checks if there's a building in the game, if there is we get it's id and show it's next level
 	//If there isn't we Display that there's nothing in there and that the player should buy a building
 	$resultInfo = mysqli_query($conn, 'SELECT bID, max(bLvl) FROM playerhasbuild WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
@@ -63,13 +64,14 @@ if ($gridSelect == false) {
 echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."<br>  Tokens: ".$rowInfo["tokens"]."</p>";
 if ($gridSelect == false) {
 	echo '<div class="posSelector-container">';
-	for ($i=1; $i < 10; $i++) { 
-		echo "<button class='posSelector-item' onclick='buyPos=".$i."; console.log(".$i.")'>"."</button>";
+	for ($i=0; $i < 9; $i++) { 
+		echo "<button class='posSelector-item' onclick='buyPos=".$i."; console.log(".$i.");'>"."</button>";
 	}
 	echo "</div>";
-	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].')" name="buy">';
+	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].');updateGFX();" name="buy">';
 }else {
 	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*$GLOBALS["nextLvl"]*1.2).' Credits)" onclick="upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
+	echo "<input type='button' style='background-color:red;' value='Remove Building' ondblclick='buyPos=".$_GET["id"].";updateGFX();removeBuild();'>";
 }
 
 
