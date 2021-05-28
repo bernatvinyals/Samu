@@ -40,7 +40,7 @@
 			 ?>
 		</script>
 	</head>
-	<body onload="setVarSidebar();updateINFO();" >
+	<body onload="setVarSidebar();updateINFO();setTimeout(upateResources,60000);" >
 		<div id="main">
 			<div class="topnav">
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
@@ -82,7 +82,7 @@
 			<div id="shopHUD" class="shop-container" style="display:none;">
 				<?php 
 				for ($i=0; $i < 4; $i++) { 
-					echo "<button "." id='".$i."00"."' class='shop-item' onclick='getInfoOf(".$i.")'>"."</button>";
+					echo "<button "." id='".$i."00"."' class='shop-item' style='background-image: url(./img/".($i+1)."_building.png);    background-size: contain;' onclick='getInfoOf(".$i.")'>"."</button>";
 				} ?>
 			</div>
 		</div>

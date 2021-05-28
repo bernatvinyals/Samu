@@ -30,7 +30,7 @@ if(mysqli_num_rows($resultUpgrade) >=1){
 		if ($playerTotalCredits>=($resultBuyCheck["dailyFee"]*$_GET["lvl"]*1.2)) {
 			//BUY/Alter
 
-			$resultUpgrded = mysqli_query($conn, 'UPDATE playerhasbuild SET bLvl = '.($resultUpgradeCheck["bID"]+1).' WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
+			$resultUpgrded = mysqli_query($conn, 'UPDATE playerhasbuild SET bLvl = '.($resultUpgradeCheck["max(bLvl)"]+1).' WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
 			if (!$resultUpgrded) {
 				die("You must log in first to perform this action.");
 			}

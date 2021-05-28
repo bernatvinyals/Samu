@@ -96,6 +96,16 @@ function updateINFO() {
 	xhttp.open("GET", "getInfoToAjax.php", true);
 	xhttp.send();
 }
+function upateResources() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			setTimeout(upateResources,60000);
+		}
+	};
+	xhttp.open("GET", "updateResources.php", true);
+	xhttp.send();
+}
 function removeBuild() {
 	document.getElementById("obj-info").innerHTML = "";
 	storeHUD.style.display = "none";
@@ -142,3 +152,4 @@ function getInfoOf(elID){
 	}else{	xhttp.open("GET", "itemInfo.php?id="+elID+"", true);}
 	xhttp.send();
 }
+

@@ -12,7 +12,7 @@ if (!$result) {
 mysqli_free_result($result);
 
 mysqli_select_db($conn, "db_sumus");
-$result = mysqli_query($conn, 'CREATE TABLE users(userID INT PRIMARY KEY AUTO_INCREMENT,username VARCHAR(16),pass VARCHAR(25),email VARCHAR (60),confCode INT,verified INT,avatarID INT);');
+$result = mysqli_query($conn, 'CREATE TABLE users(userID INT PRIMARY KEY AUTO_INCREMENT,username VARCHAR(16),pass VARCHAR(25),email VARCHAR (60),confCode INT,verified INT,avatarID INT,lastLoginTime TIMESTAMP NOT NULL);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
@@ -62,7 +62,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (4, "Tower",5600,1,1000,46,0,5000)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (4, "Tower",5600,1,1000,460,0,5000)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
