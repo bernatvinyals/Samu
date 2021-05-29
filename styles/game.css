@@ -68,6 +68,11 @@ body {
   background-color: #cccaca;
   color: black;
 }
+.sidenav button:focus {
+  border: 1px solid;
+  background-color: #cccaca;
+  color: black;
+}
 
 .game {
   z-index: 1;
