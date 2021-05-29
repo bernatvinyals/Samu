@@ -56,14 +56,16 @@ if ($gridSelect == false) {
 	//echo "<p>Current Daily Fee: ".($rowInfo["dailyFee"])."</p>";
 }
 
-echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]*(($GLOBALS["nextLvl"]-1)+.2)."<br>  Tokens: ".$rowInfo["tokens"]*(($GLOBALS["nextLvl"]-1)+.2)."</p>";
+
 if ($gridSelect == false) {
+	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."<br>  Tokens: ".$rowInfo["tokens"]."</p>";
 	echo '<div class="posSelector-container">';
 	$isbuy=true;
 	require "imageUpdateAjax.php";
 	echo "</div>";
 	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].');updateGFX();" name="buy">';
 }else {
+	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]*(($GLOBALS["nextLvl"]-1)+.2)."<br>  Tokens: ".$rowInfo["tokens"]*(($GLOBALS["nextLvl"]-1)+.2)."</p>";
 	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*($GLOBALS["nextLvl"]+.2)).' Credits)" onclick="updateINFO();upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
 	echo "<input type='button' style='background-color:red;' value='Remove Building' ondblclick='buyPos=".$_GET["id"].";updateGFX();updateINFO();removeBuild();'>";
 }

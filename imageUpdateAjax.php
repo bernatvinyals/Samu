@@ -15,9 +15,9 @@ if (isset($isbuy)) {
 			$rowInfo = mysqli_fetch_assoc($resultInfo);
 		} 
 		if ($rowInfo["bID"] > 0 && $rowInfo["bPos"]==$i) {
-			echo "<button "." disabled id='".$i."' class='grid-item' style='background-image: url("."./img/".$rowInfo["bID"]."_building.png); background-size: contain;'>"."</button>";
+			echo "<button "." disabled id='".$i."' class='posSelector-item' style='background-image: url("."./img/".$rowInfo["bID"]."_building.png);'>"."</button>";
 		}else{
-			echo "<button alt="."".$rowInfo["bID"]."  ".$rowInfo["bPos"]." "." id='".$i."' class='grid-item' style='background-image: url("."./img/0_building.png"."); background-size: contain;' onclick='buyPos=".$i.";'>"."</button>";
+			echo "<button alt="."".$rowInfo["bID"]."  ".$rowInfo["bPos"]." "." id='".$i."' class='posSelector-item' style='background-image: url("."./img/0_building.png".");' onclick='buyPos=".$i.";'>"."</button>";
 		}
 		mysqli_free_result($resultInfo);
 	} 

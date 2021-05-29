@@ -107,8 +107,8 @@ function AlterResources($conn,$credits,$tokens,$isNegative)
 			</div>
 			<div class="sidenav">
 				<input type="button"  id="Buildings" value="Buildings" onclick="setHudActive(this)">
-				<input type="button"  id="Upgrades" value="Upgrades" onclick="setHudActive(this)">
-				<input type="button"  id="Settings" value="Settings" onclick="setHudActive(this)">
+				<input type="button"  style="display:none;" id="Upgrades" value="Upgrades" onclick="setHudActive(this)">
+				<input type="button"  style="display:none;" id="Settings" value="Settings" onclick="setHudActive(this)">
 				<div id="obj-info" class="obj-info">
 				</div>
 
@@ -136,7 +136,7 @@ function AlterResources($conn,$credits,$tokens,$isNegative)
 			<div id="shopHUD" class="shop-container" style="display:none;">
 				<?php 
 				for ($i=0; $i < 4; $i++) { 
-					echo "<button "." id='".$i."00"."' class='shop-item' style='background-image: url(./img/".($i+1)."_building.png);    background-size: contain;' onclick='getInfoOf(".$i.")'>"."</button>";
+					echo "<button "." id='".$i."00"."' class='shop-item' style='background-image: url(./img/".($i+1)."_building.png);' onclick='getInfoOf(".$i.")'>"."</button>";
 				} ?>
 			</div>
 		</div>

@@ -64,7 +64,7 @@ body {
   border: 0px;
 }
 
-.sidenav input:hover {
+.sidenav button:hover {
   background-color: #cccaca;
   color: black;
 }
@@ -74,35 +74,50 @@ body {
   font-family: CyberGen, sans-serif;
   float: left;
   position: absolute;
-  left: 232px;
+  left: 25vw;
   top: 44px;
 }
 .grid-container {
   background-color: #2196F3;
-  padding: 10px;
   display: grid;
-  grid-template-columns: 200px 200px 200px;
-  width: max-content;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 95vh;
+  column-gap: 8vh;
+  row-gap: 8vh;
+  background-image: url("../img/grid.png");
+  background-size: cover;
 }
 .grid-item {
   background-color: red;
   position: relative;
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
-  border:1px solid black;
+  padding-top: 99%;
+  border: 0px solid black;
+  background-size: cover;
+}
+@media all and (max-width: 950px) {
+    .game{
+        margin-left: 0px;
+        left: 232px;
+    }
 }
 .posSelector-container {
   background-color: #2196F3;
   display: grid;
   z-index: 2;
-  grid-template-columns: 77.3px 77.3px 77.3px;
-  width: max-content;
+  grid-template-columns: 66px 66px 66px;
+  width: 233px;
+  column-gap: 19px;
+  row-gap: 21px;
+  background-image: url("../img/grid.png");
+  background-size: cover;
 }
 .posSelector-item {
   background-color: red;
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
-  border:1px solid black;
+  padding-top: 95%;
+  border: 0px solid black;
+  background-size: cover;
 }
 .shop-container {
   background-color: #2196F3;
@@ -116,7 +131,8 @@ body {
 }
 .shop-item {
   background-color: green;
+  background-size: cover;
   position: relative;
-  width: 100%;
+  width: 106%;
   padding-top: 100%; /* 1:1 Aspect Ratio */
 }

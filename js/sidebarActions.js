@@ -18,8 +18,8 @@ function setVarSidebar(){
 }
 function setHudActive(obj) {
 	storeButton.style = "background-color: var(--idleSidebar);";
-	upgradesButton.style ="background-color: var(--idleSidebar);";
-	settingsButton.style ="background-color: var(--idleSidebar);";
+	upgradesButton.style ="display:none;background-color: var(--idleSidebar);";
+	settingsButton.style ="display:none;background-color: var(--idleSidebar);";
 	obj.style = "background-color: var(--activeSidebar);"; 
 	if (obj.id == "Buildings") {
 		storeHUD.style.display = "grid";
