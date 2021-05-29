@@ -22,4 +22,3 @@ mysqli_close($conn);
 ?>
 <div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
 <div id="creditsCount">Credits: <?php echo $credits; ?></div>
-<div id="albumsCount">Albums: <?php echo $albums; ?></div>

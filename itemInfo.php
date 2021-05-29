@@ -35,8 +35,6 @@ if ($notInGrid) {
 	die("Buy a building to have something in this plot");
 }
 
-
-
 //OUTPUT INFO IN CASE THAT THERE'S SOMETHING IN GRID OR THAT THE ITEM SELECTED EXISTS
 if ($gridSelect == false) {
 	$resultInfo = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee FROM buildings WHERE bID = "'.($_GET["id"]+1).'"');
@@ -55,10 +53,10 @@ if ($gridSelect == false) {
 	echo "<p>Initial Price:".$rowInfo["bPrice"]."</p>";
 	echo "<p>Daily Fee: ".($rowInfo["dailyFee"])."</p>";
 }else {
-	echo "<p>Current Daily Fee: ".($rowInfo["dailyFee"])."</p>";
+	//echo "<p>Current Daily Fee: ".($rowInfo["dailyFee"])."</p>";
 }
 
-echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."<br>  Tokens: ".$rowInfo["tokens"]."</p>";
+echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]*(($GLOBALS["nextLvl"]-1)+.2)."<br>  Tokens: ".$rowInfo["tokens"]*(($GLOBALS["nextLvl"]-1)+.2)."</p>";
 if ($gridSelect == false) {
 	echo '<div class="posSelector-container">';
 	$isbuy=true;
@@ -66,11 +64,8 @@ if ($gridSelect == false) {
 	echo "</div>";
 	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].');updateGFX();" name="buy">';
 }else {
-	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*$GLOBALS["nextLvl"]*1.2).' Credits)" onclick="upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
-	echo "<input type='button' style='background-color:red;' value='Remove Building' ondblclick='buyPos=".$_GET["id"].";updateGFX();removeBuild();'>";
+	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*($GLOBALS["nextLvl"]+.2)).' Credits)" onclick="updateINFO();upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
+	echo "<input type='button' style='background-color:red;' value='Remove Building' ondblclick='buyPos=".$_GET["id"].";updateGFX();updateINFO();removeBuild();'>";
 }
-
-
-
 mysqli_close($conn);
  ?>
