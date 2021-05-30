@@ -116,6 +116,7 @@ body {
   row-gap: 8vh;
   background-image: url("../img/grid.png");
   background-size: cover;
+  box-shadow: 0px 0px 15px black;
 }
 .grid-item {
   background-color: red;
@@ -150,20 +151,24 @@ body {
   background-size: cover;
 }
 .shop-container {
-  background-color: #2196F3;
+  background-color: var(--activeSidebar);
   margin-left: 232px;
   display: grid;
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  grid-template-columns: 100px 100px;
-  width: max-content;
-  box-shadow: 31px 0px 103px -13px black;
+  grid-template-columns: 12vh;
+  width: 13.4vh;
+  /*box-shadow: -11px 0px 103px -13px black;*/
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .shop-item {
   background-color: green;
   background-size: cover;
   position: relative;
   width: 106%;
+  margin: 0.3vh;
+  border: 1px solid var(--activeSidebar);
   padding-top: 100%; /* 1:1 Aspect Ratio */
 }
 .obj-info p{
