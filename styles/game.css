@@ -90,7 +90,7 @@ body {
 }
 
 .sidenav button:hover, .sidenav input:hover{
-  background-color: var(--activeSidebar);
+  background-color: var(--activeSidebar) !important;
   color: black;
 }
 .sidenav button:focus {

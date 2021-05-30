@@ -35,7 +35,14 @@ Reputation Req: 1000
 Initial Price:5600
 Income/minute: 460 Credits
 ```
-# TODO
+## TODO
 - Encrypt password
 - Email Verification
 - Upgrade Bulding Times
+
+## ASSETS CREDITS
+Disclamer: This is not a production game, these assets have to be changed if used in production or in any comercial use.
+- pixel jeff for Login and Register background [Giphy](https://giphy.com/gifs/pixel-art-jeff-lkceXNDw4Agryfrwz8) 
+- Jake Bushell for raining gif [Giphy](https://giphy.com/stickers/arsissist-jakebushell-thebigdrip-sclaXPuYMBQVN4OsuM)
+- ansimuz for ingame background [Itch.io](https://ansimuz.itch.io/)
+- Exuin for tileset [Itch.io](https://emily2.itch.io/)
