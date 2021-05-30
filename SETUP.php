@@ -1,8 +1,6 @@
 	<?php 
 //DATABASE SERVER SETUP WITH A DEFAULT ADMIN ACCOUNT
-$USERNAME = "root";
-$PASSWORD = "";
-$SERVER = "localhost:3306";
+include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 $result = mysqli_query($conn, 'CREATE DATABASE db_sumus');
 if (!$result) {

@@ -189,4 +189,8 @@ body {
   background-color: green;
   z-index: 2;
   display: block;
+  -webkit-transition: width 1s linear;
+  -moz-transition: width 1s linear;
+  -o-transition: width 1s linear;
+  transition: width 1s linear;
 }

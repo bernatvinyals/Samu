@@ -15,9 +15,8 @@ function updateProgressBar(){
 }
 var progressBarPercentage = 0;
 function progressBar(){
-	var proggress = 100/600;
+	var proggress = 100/60;
 	progressBarPercentage += proggress;
-	console.log(progressBarPercentage);
 	document.getElementById("resourceProgressBar").style = "width:"+(progressBarPercentage)+"%;"
-	setTimeout(progressBar,100)
+	setTimeout(progressBar,1000)
 }
