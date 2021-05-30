@@ -39,11 +39,13 @@ if ($notInGrid) {
 if ($gridSelect == false) {
 	$resultInfo = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee FROM buildings WHERE bID = "'.($_GET["id"]+1).'"');
 	$rowInfo = mysqli_fetch_assoc($resultInfo);
-	echo "<p>Name:".$rowInfo["bName"]."</p>";
+	echo "<div style='background-image: url(./img/".($_GET["id"]+1)."_building.png);padding-top: 100%;background-size: cover;'></div>";
+	echo "<h2>Name:".$rowInfo["bName"]."</h2>";
 } else {
 	$resultInfo = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee FROM buildings WHERE bID = "'.$GLOBALS["selected"].'"'); //SELECT THAT POSITION AND DISPLAY WHAT IT IS
 	$rowInfo = mysqli_fetch_assoc($resultInfo);
-	echo "<p>Name:".$rowInfo["bName"]." (".($GLOBALS["nextLvl"]-1).")</p>";
+	echo "<div style='background-image: url(./img/".($GLOBALS["selected"])."_building.png);padding-top: 100%;background-size: cover;'></div>";
+	echo "<h2>Name:".$rowInfo["bName"]." (".($GLOBALS["nextLvl"]-1).")</h2>";
 	mysqli_free_result($resultInfo);
 }
 
@@ -51,22 +53,23 @@ if ($gridSelect == false) {
 if ($gridSelect == false) {
 	echo "<p>Reputation Req: ".$rowInfo["rep"]."</p>";
 	echo "<p>Initial Price:".$rowInfo["bPrice"]."</p>";
-	echo "<p>Daily Fee: ".($rowInfo["dailyFee"])."</p>";
+	//echo "<p>Daily Fee: ".($rowInfo["dailyFee"])."</p>";
 }else {
 	//echo "<p>Current Daily Fee: ".($rowInfo["dailyFee"])."</p>";
 }
 
 
 if ($gridSelect == false) {
-	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."<br>  Tokens: ".$rowInfo["tokens"]."</p>";
+	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."</p>";
 	echo '<div class="posSelector-container">';
 	$isbuy=true;
 	require "imageUpdateAjax.php";
 	echo "</div>";
 	echo '<input type="button" value="Buy" onclick="buyByIndex('.$_GET["id"].');updateGFX();" name="buy">';
 }else {
-	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]*(($GLOBALS["nextLvl"]-1)+.2)."<br>  Tokens: ".$rowInfo["tokens"]*(($GLOBALS["nextLvl"]-1)+.2)."</p>";
-	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*($GLOBALS["nextLvl"]+.2)).' Credits)" onclick="updateINFO();upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade">';
+	echo "<p>Income/minute: <br>  Credits: ".$rowInfo["credits"]."</p>";
+	echo "<p>Next Level, Income/minute: <br>  Credits: ".$rowInfo["credits"]*(($GLOBALS["nextLvl"]-1)+.2)."</p>";
+	echo '<input type="button" value="Upgrade ('.($rowInfo["dailyFee"]*($GLOBALS["nextLvl"]+.2)).' Credits)" onclick="updateINFO();upgradeByIndex('.$_GET["id"].",".$GLOBALS["nextLvl"].')" name="upgrade" style="font-size: 1.5rem;" >';
 	echo "<input type='button' style='background-color:red;' value='Remove Building' ondblclick='buyPos=".$_GET["id"].";updateGFX();updateINFO();removeBuild();'>";
 }
 mysqli_close($conn);

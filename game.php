@@ -7,7 +7,7 @@ if ($_SESSION["login"] != true) {
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
-$resultInfo = mysqli_query($conn, 'SELECT curxp.rep, curxp.credits, curxp.tokens, curxp.albums FROM (curxp INNER JOIN users ON users.username = "'.$_SESSION["username"].'");');
+$resultInfo = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curxp WHERE userID = '.$_SESSION["userID"].';');
 	if (!$resultInfo) {
 		echo "Error:".mysqli_error($conn);
 		header("Location: logout.php");
@@ -16,6 +16,7 @@ $resultInfo = mysqli_query($conn, 'SELECT curxp.rep, curxp.credits, curxp.tokens
 $rowInfo = mysqli_fetch_assoc($resultInfo);
 $tokens = $rowInfo["tokens"];
 $credits = $rowInfo["credits"];
+$rep= $rowInfo["rep"];
 mysqli_free_result($resultInfo);
 
 $resultQTimestamp =  mysqli_query($conn, 'SELECT lastLoginTime+0 FROM users WHERE userID = '.$_SESSION["userID"].'' );
@@ -55,26 +56,28 @@ if (mysqli_num_rows($result) > 0) {
 	}
 	$rowUserInfo=mysqli_fetch_assoc($selectUserInfo);
 	$TotalCredits = $TotalCredits * $minutesFromLastLogin;
+	$Rep = 1 * $minutesFromLastLogin;
 	$Tokens=floor($TotalCredits/1000);
 	$Credits=$TotalCredits%1000;
 
 	if ($rowUserInfo["credits"]+$Credits>1000){
 		$Tokens +=1;
 		$Credits = ($rowUserInfo["credits"]-1000)+$Credits;
-  		AlterResources($conn,$Credits,$Tokens,true);
+  		AlterResources($conn,$Credits,$Tokens,$Rep,true);
 	}
 	else{
-		AlterResources($conn,$Credits,$Tokens,false);
+		AlterResources($conn,$Credits,$Tokens,$Rep,false);
 	}
 }
-function AlterResources($conn,$credits,$tokens,$isNegative)
+function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 {
 	if ($isNegative) {
-		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = '.$credits.', tokens = (tokens+'.$tokens.') WHERE curxp.userID = '.$_SESSION["userID"].'');
+		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = '.$credits.', tokens = (tokens+'.$tokens.'), rep = (rep+'.$rep.') WHERE curxp.userID = '.$_SESSION["userID"].'');
 	}else{
-		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = (credits+'.$credits.'), tokens = (tokens+'.$tokens.') WHERE curxp.userID = '.$_SESSION["userID"].'');
+		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = (credits+'.$credits.'), tokens = (tokens+'.$tokens.'), rep = (rep+'.$rep.') WHERE curxp.userID = '.$_SESSION["userID"].'');
 	}
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -101,6 +104,7 @@ function AlterResources($conn,$credits,$tokens,$isNegative)
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
 				<div><?php echo $_SESSION["username"]; ?></div>
 				<div id="userInfo" style="padding:0px;">
+					<div id="repCount">Reputation: <?php echo $rep; ?></div>
 					<div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
 					<div id="creditsCount">Credits: <?php echo $credits; ?></div>
 				</div>

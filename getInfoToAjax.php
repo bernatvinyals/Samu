@@ -7,18 +7,18 @@ if ($_SESSION["login"] != true) {
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
-$resultInfo = mysqli_query($conn, 'SELECT curxp.rep, curxp.credits, curxp.tokens, curxp.albums FROM (curxp INNER JOIN users ON users.username = "'.$_SESSION["username"].'");');
+$resultInfo = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curxp WHERE userID = '.$_SESSION["userID"].';');
 if (!$resultInfo) {
 	echo "Error:".mysqli_error($conn);
-	header("Location: logout.php");
 	die();
 	}
 $rowInfo = mysqli_fetch_assoc($resultInfo);
 $tokens = $rowInfo["tokens"];
 $credits = $rowInfo["credits"];
-$albums= $rowInfo["albums"];
+$rep= $rowInfo["rep"];
 mysqli_free_result($resultInfo);
 mysqli_close($conn);
 ?>
+<div id="repCount">Reputation: <?php echo $rep; ?></div>
 <div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
 <div id="creditsCount">Credits: <?php echo $credits; ?></div>

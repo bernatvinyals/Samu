@@ -29,7 +29,6 @@ if (mysqli_num_rows($result) > 0) {
 	$TotalCredits=0;
 	//$i=0;
 	while($row = mysqli_fetch_assoc($result)) {
-		$i++;
   		$resultOfBuilding = mysqli_query($conn,"SELECT credits FROM buildings WHERE bID = ".$row["bID"]."");
 
   		if (!$resultOfBuilding) {
@@ -51,6 +50,7 @@ if (mysqli_num_rows($result) > 0) {
 	}
 	$rowUserInfo=mysqli_fetch_assoc($selectUserInfo);
 	//echo "<br>TotalCredits:".$TotalCredits."<br>";
+	$Rep = 10;
 	$Tokens=floor($TotalCredits/1000);
 	$Credits=$TotalCredits%1000;
 	//echo "Tokens:".$Tokens."<br>";
@@ -61,19 +61,19 @@ if (mysqli_num_rows($result) > 0) {
 		$Credits = ($rowUserInfo["credits"]-1000)+$Credits;
 		//echo "Changed Credits:".$Credits."<br>";
 		//echo "[Above 1000C: ".$Credits."  ".$Tokens."]";
-  		AlterResources($conn,$Credits,$Tokens,true);
+  		AlterResources($conn,$Credits,$Tokens,$Rep,true);
 	}
 	else{
 		//echo "[Blelow 1000C: ".$Credits."  ".$Tokens."]";
-		AlterResources($conn,$Credits,$Tokens,false);
+		AlterResources($conn,$Credits,$Tokens,$Rep,false);
 	}
 }
-function AlterResources($conn,$credits,$tokens,$isNegative)
+function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 {
 	if ($isNegative) {
-		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = '.$credits.', tokens = (tokens+'.$tokens.') WHERE curxp.userID = '.$_SESSION["userID"].'');
+		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = '.$credits.', tokens = (tokens+'.$tokens.'), rep = (rep+'.$rep.') WHERE curxp.userID = '.$_SESSION["userID"].'');
 	}else{
-		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = (credits+'.$credits.'), tokens = (tokens+'.$tokens.') WHERE curxp.userID = '.$_SESSION["userID"].'');
+		$resultRes = mysqli_query($conn, 'UPDATE curxp SET credits = (credits+'.$credits.'), tokens = (tokens+'.$tokens.'), rep = (rep+'.$rep.') WHERE curxp.userID = '.$_SESSION["userID"].'');
 	}
 }
  ?>

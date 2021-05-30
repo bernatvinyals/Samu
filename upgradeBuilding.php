@@ -7,7 +7,6 @@ if (!isset($_SESSION["login"]) || !isset($_GET["id"])) {
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
-echo "Input: Pos: ".$_GET["id"]."<BR>";
 $resultUpgrade = mysqli_query($conn, 'SELECT bID, max(bLvl), bLvl FROM playerhasbuild WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["id"].' ');
 if (!$resultUpgrade) {
 	die("You must log in first to perform this action.");
@@ -19,8 +18,6 @@ if(mysqli_num_rows($resultUpgrade) >=1){
 	$playerTotalCredits=0;
 	$playerIndividualCredits=0;
 	$check1=GetResources($conn, $playerREP, $playerTotalCredits, $playerIndividualCredits);
-	echo $playerREP." ".$playerTotalCredits;
-	echo "--".print_r($resultUpgradeCheck);
 	if ($check1 && $resultUpgradeCheck["bID"] >= 1){
 		$resultBuy = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, dailyFee FROM buildings WHERE bID = "'.($resultUpgradeCheck["bID"]).'"');
 		$resultBuyCheck = mysqli_fetch_assoc($resultBuy);
@@ -46,7 +43,7 @@ if(mysqli_num_rows($resultUpgrade) >=1){
 				AlterResources($conn,$minusCredits,$minusTokens,false);
 			}
 
-			echo "Congrats! <br>You just Bought a ".$resultBuyCheck["bName"];
+			echo "<h2>Congrats!</h2><p>You just Upgraded the ".$resultBuyCheck["bName"]."</p>";
 		}
 	}
 }

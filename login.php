@@ -87,16 +87,19 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="./styles/fonts.css">
 		<link rel="stylesheet" type="text/css" href="./styles/credentials.css">
+		<link rel="stylesheet" type="text/css" href="./styles/game.css">
 	</head>
 	<body>
-		 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-		 	<p>LOGO HERE</p>
-		 	<label>Username:</label>
-			<input type="text" name="username" required maxlength="12" minlength="4">
-			<label>Password:</label>
-			<input type="password" name="password" required  maxlength="25">
-			<input type="submit" name="" value="Log In">
-			<p>Don't have an account? <a href="register.php">Register right here</a></p>
-		</form>
+		<div class="sidenav">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+				<h1 id="logo" class="neonText">SUMUS</h1>
+				<h2>Username:</h2>
+				<input type="text" name="username" required maxlength="12" minlength="4">
+				<h2>Password:</h2>
+				<input type="password" name="password" required  maxlength="25">
+				<input type="submit" name="" value="Log In">
+				<p>Don't have an account? <a href="register.php">Register right here</a></p>
+			</form>
+		</div>
 	</body>
 </html>

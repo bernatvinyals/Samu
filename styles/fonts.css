@@ -1,17 +1,12 @@
-@font-face {
-  font-family: CyberGen;
-  src: url(./font/CYBERGEN.TTF) format("TrueType");
-}
-@font-face {
-  font-family: Cybertronic;
-  src: url(./font/ModernCybertronic.otf) format("OpenType");
-}
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 .neonText {
   color: #fff;
   text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
+    /* White glow */
+    0 0 2px #fff,
+    0 0 5px #fff,
+    0 0 11px #fff,
+    /* Green glow */
     0 0 42px #0fa,
     0 0 82px #0fa,
     0 0 92px #0fa,

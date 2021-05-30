@@ -6,7 +6,6 @@ if (!isset($_SESSION["login"])) {
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
-echo "Input: ".($_GET["id"]+1)."<BR>";
 $resultBuy = mysqli_query($conn, 'SELECT bID, bName, bPrice, bLvl, rep, dailyFee FROM buildings WHERE bID = "'.($_GET["id"]+1).'"');
 $resultBuyCheck = mysqli_fetch_assoc($resultBuy);
 if (!$resultBuy) {
@@ -19,7 +18,7 @@ if (mysqli_num_rows($resultBuy) >=1){
 	}
 	$rowResources = mysqli_fetch_assoc($resultResources);
 	$creditsCalc=$rowResources["credits"]+($rowResources["tokens"]*1000);
-	if ($rowResources["rep"]>=$resultBuyCheck["rep"] && $creditsCalc>=$resultBuyCheck["dailyFee"]) {
+	if ($rowResources["rep"]>=$resultBuyCheck["rep"] && $creditsCalc>=$resultBuyCheck["bPrice"]) {
 		$resultPositionCheck = mysqli_query($conn, 'SELECT bID, max(bLvl) FROM playerhasbuild WHERE userID = '.$_SESSION["userID"].' AND bPos ='.$_GET["pos"].' ');
 		if (!$resultPositionCheck) {
 			die("Error:".mysqli_error($conn));
@@ -32,8 +31,8 @@ if (mysqli_num_rows($resultBuy) >=1){
 				die();
 			}
 			//Alter Resources
-			$minusTokens=floor($resultBuyCheck["dailyFee"]/1000);
-			$minusCredits=$resultBuyCheck["dailyFee"]%1000;
+			$minusTokens=floor($resultBuyCheck["bPrice"]/1000);
+			$minusCredits=$resultBuyCheck["bPrice"]%1000;
 			if ($rowResources["credits"]-$minusCredits<0){
 				$minusTokens +=1;
 				$minusCredits = ($rowResources["credits"]+1000)-$minusCredits;
@@ -42,7 +41,7 @@ if (mysqli_num_rows($resultBuy) >=1){
 			else{
 				AlterResources($conn,$minusCredits,$minusTokens,false);
 			}
-			echo "Congrats! <br>You just Bought a ".$resultBuyCheck["bName"];
+			echo "<h2>Congrats!</h2><p>You just Bought a ".$resultBuyCheck["bName"]."</p>";
 		}
 	}
 	else {
