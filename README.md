@@ -11,23 +11,25 @@ A Apache Server, a PHP server and a MySQL server.
 
 ##Buildings
 In the game there's 4 buildings Studio, Merch Store, Museum and Tower. Each has the following:
-- ```
+```
 Name:Studio
 Reputation Req: 0
 Initial Price:0
-Income/minute: 10 Credits```
-- ```
+Income/minute: 10 Credits
+```
+```
 Name:Merch Store
 Reputation Req: 100
 Initial Price:100
-Income/minute: 30 Credits```
-- ```
+Income/minute: 30 Credits
+```
+```
 Name:Museum
 Reputation Req: 600
 Initial Price:600
 Income/minute: 200 Credits
 ```
-- ```
+```
 Name:Tower
 Reputation Req: 1000
 Initial Price:5600
