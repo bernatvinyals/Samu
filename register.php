@@ -41,7 +41,7 @@
 
 
 			mysqli_free_result($result);
-			$userResult = mysqli_query($conn, 'INSERT INTO users (username, pass, email, confCode, verified, avatarID) VALUES ("'.$queryusername.'", "'.$querypassword.'", "'.$queryemail.'", '.rand(1000,9999).', 1, 1)');
+			$userResult = mysqli_query($conn, 'INSERT INTO users (username, pass, email, confCode, verified, avatarID) VALUES ("'.$queryusername.'", "'.md5($querypassword).'", "'.$queryemail.'", '.rand(1000,9999).', 1, 1)');
 			if (!$userResult) {
 				echo "Error:".mysqli_error($conn);
 				header("Location: register.php");

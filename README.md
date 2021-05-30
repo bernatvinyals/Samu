@@ -36,7 +36,6 @@ Initial Price:5600
 Income/minute: 460 Credits
 ```
 ## TODO
-- Encrypt password
 - Email Verification
 - Upgrade Bulding Times
 

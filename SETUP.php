@@ -10,7 +10,7 @@ if (!$result) {
 mysqli_free_result($result);
 
 mysqli_select_db($conn, "db_sumus");
-$result = mysqli_query($conn, 'CREATE TABLE users(userID INT PRIMARY KEY AUTO_INCREMENT,username VARCHAR(16),pass VARCHAR(25),email VARCHAR (60),confCode INT,verified INT,avatarID INT,lastLoginTime TIMESTAMP NOT NULL);');
+$result = mysqli_query($conn, 'CREATE TABLE users(userID INT PRIMARY KEY AUTO_INCREMENT,username VARCHAR(16) NOT NULL,pass VARCHAR(32) NOT NULL,email VARCHAR (80) NOT NULL,confCode INT,verified INT,avatarID INT,lastLoginTime TIMESTAMP NOT NULL);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
@@ -79,7 +79,7 @@ mysqli_free_result($result);
 
 
 //USER INSERTS
-$result = mysqli_query($conn, 'INSERT INTO users (userID, username, pass, email, confCode, verified, avatarID) VALUES (0, "admin", "admin", "mail@service.com", 0000, 1, 1);');
+$result = mysqli_query($conn, 'INSERT INTO users (userID, username, pass, email, confCode, verified, avatarID) VALUES (0, "admin", "'.md5("admin").'", "mail@service.com", 0000, 1, 1);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();

@@ -42,7 +42,7 @@
 			$queryusername = test_input($_POST["username"]);
 			$querypassword = test_input($_POST["password"]);
 
-			$result = mysqli_query($conn, 'SELECT userID, username, pass, verified, avatarID FROM users WHERE username = "'.$queryusername.'" AND pass = "'.$querypassword.'"');
+			$result = mysqli_query($conn, 'SELECT userID, username, pass, verified, avatarID FROM users WHERE username = "'.$queryusername.'" AND pass = "'.md5($querypassword).'"');
 			if (!$result) {
 				echo "Error:".mysqli_error($conn);
 				header("Location: login.php");
