@@ -10,3 +10,14 @@ function updateGFX() {
 	xhttp.send();	
 	}, 400);
 }
+function updateProgressBar(){
+	document.getElementById("resourceProgress").style = "width:"+(window.innerWidth-232)+"px;"
+}
+var progressBarPercentage = 0;
+function progressBar(){
+	var proggress = 100/600;
+	progressBarPercentage += proggress;
+	console.log(progressBarPercentage);
+	document.getElementById("resourceProgressBar").style = "width:"+(progressBarPercentage)+"%;"
+	setTimeout(progressBar,100)
+}

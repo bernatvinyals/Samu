@@ -98,7 +98,7 @@ function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 			 ?>
 		</script>
 	</head>
-	<body onload="setVarSidebar();updateINFO();setTimeout(upateResources,60000);" >
+	<body onresize="updateProgressBar()" onload="updateProgressBar();setVarSidebar();updateINFO();setTimeout(upateResources,60000);progressBar();" >
 		<div id="main">
 			<div class="topnav">
 				<input type="button" value="Log Out" onclick="location.href = 'logout.php'">
@@ -108,6 +108,9 @@ function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 					<div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
 					<div id="creditsCount">Credits: <?php echo $credits; ?></div>
 				</div>
+			</div>
+			<div id="resourceProgress">
+				<div id="resourceProgressBar"></div>
 			</div>
 			<div class="sidenav">
 				<input type="button"  id="Buildings" value="Buildings" onclick="setHudActive(this)">
@@ -143,7 +146,9 @@ function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 					echo "<button "." id='".$i."00"."' class='shop-item' style='background-image: url(./img/".($i+1)."_building.png);' onclick='getInfoOf(".$i.")'>"."</button>";
 				} ?>
 			</div>
+			<div id="secondGFX"></div>
 		</div>
+
 		<div id="addins" style="display:none;"></div>
 	</body>
 	<footer>
