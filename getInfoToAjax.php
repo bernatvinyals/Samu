@@ -1,12 +1,15 @@
 <?php
+//Checks if login
 session_start();
 if ($_SESSION["login"] != true) {
 	header("Location: login.php");	
 	die();	
 }
+//Connects to database
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
+//Grabs new player info
 $resultInfo = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curxp WHERE userID = '.$_SESSION["userID"].';');
 if (!$resultInfo) {
 	echo "Error:".mysqli_error($conn);
@@ -18,6 +21,7 @@ $credits = $rowInfo["credits"];
 $rep= $rowInfo["rep"];
 mysqli_free_result($resultInfo);
 mysqli_close($conn);
+//Displays info
 ?>
 <div id="repCount">Reputation: <?php echo $rep; ?></div>
 <div id="tokensCount">Tokens: <?php echo $tokens; ?></div>

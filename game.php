@@ -1,12 +1,15 @@
 <?php 
+//Checks if Login
 session_start();
 if ($_SESSION["login"] != true) {
 	header("Location: login.php");	
 	die();	
 }
+//Connects to Database
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 mysqli_select_db($conn, "db_sumus");
+//Grabs Player Info
 $resultInfo = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curxp WHERE userID = '.$_SESSION["userID"].';');
 	if (!$resultInfo) {
 		echo "Error:".mysqli_error($conn);
@@ -14,26 +17,31 @@ $resultInfo = mysqli_query($conn, 'SELECT rep, credits, tokens, albums FROM curx
 		die();
 	}
 $rowInfo = mysqli_fetch_assoc($resultInfo);
-$tokens = $rowInfo["tokens"];
-$credits = $rowInfo["credits"];
+$playertokens = $rowInfo["tokens"];
+$playerCredits = $rowInfo["credits"];
 $rep= $rowInfo["rep"];
 mysqli_free_result($resultInfo);
 
+//Grabs Player's last connection TIMESTAMP
 $resultQTimestamp =  mysqli_query($conn, 'SELECT lastLoginTime+0 FROM users WHERE userID = '.$_SESSION["userID"].'' );
 $rowQTimestamp = mysqli_fetch_assoc($resultQTimestamp);
+//Grabs Database Timestamp
 $rDBtime =  mysqli_query($conn, 'SELECT CURRENT_TIMESTAMP()+0');
 $rowrDBtime = mysqli_fetch_assoc($rDBtime);
+//Calc how many minutes has passed since last recorded login
 $minutesFromLastLogin = intval(($rowrDBtime["CURRENT_TIMESTAMP()+0"]- $rowQTimestamp["lastLoginTime+0"])/60);
 
-
+//Set last login to now
 $resultUpgrade = mysqli_query($conn,"UPDATE users SET lastLoginTime = NOW() WHERE users.userID = ".$_SESSION["userID"]."");
 if (!$resultUpgrade) {
 	die("You must log in first to perform this action.");
 }
+//Select all buildings from user
 $result = mysqli_query($conn,"SELECT bID, bLvl FROM playerhasbuild WHERE userID = ".$_SESSION["userID"]."");
 if (!$result) {
 	die("Error:".mysqli_error($conn));
 }
+//Sum the total amount of gain that every building has generated
 if (mysqli_num_rows($result) > 0) {
 	$TotalCredits=0;
 	while($row = mysqli_fetch_assoc($result)) {
@@ -45,24 +53,19 @@ if (mysqli_num_rows($result) > 0) {
   		$rowOfBuilding = mysqli_fetch_assoc($resultOfBuilding);
 
   		if ($row["bLvl"]>1) {
-  			$TotalCredits += $rowOfBuilding["credits"]*($row["bLvl"]+.2);
+  			$TotalCredits += $rowOfBuilding["credits"]*($row["bLvl"]*1.2);
   		}else{
 			$TotalCredits += $rowOfBuilding["credits"];
   		}
 	}
-	$selectUserInfo = mysqli_query($conn,"SELECT rep, credits, tokens FROM curxp WHERE userID = ".$_SESSION["userID"]."");
-	if (!$selectUserInfo) {
-		die("Error:".mysqli_error($conn));
-	}
-	$rowUserInfo=mysqli_fetch_assoc($selectUserInfo);
 	$TotalCredits = $TotalCredits * $minutesFromLastLogin;
 	$Rep = 1 * $minutesFromLastLogin;
 	$Tokens=floor($TotalCredits/1000);
 	$Credits=$TotalCredits%1000;
 
-	if ($rowUserInfo["credits"]+$Credits>1000){
+	if ($playerCredits+$Credits>1000){
 		$Tokens +=1;
-		$Credits = ($rowUserInfo["credits"]-1000)+$Credits;
+		$Credits = ($playerCredits-1000)+$Credits;
   		AlterResources($conn,$Credits,$Tokens,$Rep,true);
 	}
 	else{
@@ -93,8 +96,8 @@ function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 		<script type="text/javascript" src="./js/gfx.js"></script>
 		<script type="text/javascript">
 			<?php 
-			echo "credits = ".$credits.";";
-			echo "tokens = ".$tokens.";";
+			echo "credits = ".$playerCredits.";";
+			echo "tokens = ".$playertokens.";";
 			 ?>
 		</script>
 	</head>
@@ -105,8 +108,8 @@ function AlterResources($conn,$credits,$tokens,$rep,$isNegative)
 				<div><?php echo $_SESSION["username"]; ?></div>
 				<div id="userInfo" style="padding:0px;">
 					<div id="repCount">Reputation: <?php echo $rep; ?></div>
-					<div id="tokensCount">Tokens: <?php echo $tokens; ?></div>
-					<div id="creditsCount">Credits: <?php echo $credits; ?></div>
+					<div id="tokensCount">Tokens: <?php echo $playertokens; ?></div>
+					<div id="creditsCount">Credits: <?php echo $playerCredits; ?></div>
 				</div>
 			</div>
 			<div id="resourceProgress">

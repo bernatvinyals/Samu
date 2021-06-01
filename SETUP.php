@@ -24,7 +24,7 @@ if (!$result) {
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'CREATE TABLE buildings(bID INT PRIMARY KEY, bName VARCHAR(16), bPrice INT, bLvl INT, rep INT, credits INT, tokens INT, dailyFee INT);');
+$result = mysqli_query($conn, 'CREATE TABLE buildings(bID INT PRIMARY KEY, bName VARCHAR(16), bPrice INT, bLvl INT, rep INT, credits INT, dailyFee INT);');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
@@ -39,28 +39,28 @@ if (!$result) {
 mysqli_free_result($result);
 
 //BUILDING INSERTS
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (1,"Studio",0,1,0,10,0,300)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, dailyFee) VALUES (1,"Studio",0,1,0,10,300)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (2,"Merch Store",100,1,100,30,0,800)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, dailyFee) VALUES (2,"Merch Store",100,1,100,30,800)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (3,"Museum",600,1,600,200,0,5000)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, dailyFee) VALUES (3,"Museum",600,1,600,200,5000)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();
 }
 mysqli_free_result($result);
 
-$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, tokens, dailyFee) VALUES (4, "Tower",5600,1,1000,460,0,5000)');
+$result = mysqli_query($conn, 'INSERT INTO buildings(bID, bName, bPrice, bLvl, rep, credits, dailyFee) VALUES (4, "Tower",5600,1,1000,460,5000)');
 if (!$result) {
 	echo "Error:".mysqli_error($conn);
 	die();

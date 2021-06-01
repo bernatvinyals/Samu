@@ -1,32 +1,11 @@
 <?php 
-	//Login
-	//	CREATE DATABASE db_sumus;
-	//CREATE TABLE users(
-	//	userID INT PRIMARY KEY,
-	//    username VARCHAR(16),
-	//    pass VARCHAR(25),
-	//    email VARCHAR (60),
-	//    confCode INT,
-	//    verified INT,
-	//    avatarID INT
-	//);
-	//INSERT INTO `users` (`userID`, `username`, `pass`, `email`, `confCode`, `verified`, `avatarID`) VALUES ('0', 'admin', 'admin', 'mail@service.com', NULL, NULL, '1');
-	//CREATE TABLE curXP(
-	//    infID INT PRIMARY KEY,
-	//	userID INT,
-	//    rep INT,
-	//    credits INT,
-	//    tokens INT,
-	//    albums INT,
-	//  	FOREIGN KEY (userID) REFERENCES users(userID)
-	//);
-	//CREATE TABLE buildings(bID INT PRIMARY KEY, bName VARCHAR(16), bPrice INT, bLvl INT, rep INT, credits INT, tokens INT, dailyFee INT);
-	//CREATE TABLE playerHasBuild (userID INT, bID INT, bLvl INT, bPos INT, FOREIGN KEY (userID) REFERENCES users(userID), FOREIGN KEY (bID) REFERENCES buildings(bID));
 	session_start();
+	//Checks if player ins't logged in
 	if (!isset($_SESSION["login"])) {
 		$_SESSION["login"] = false;
 	}
-	if ($_SESSION["login"]  == true) {
+	//Checks if player is logged in to redirect to game
+	if ($_SESSION["login"] == true) {
 		header("Location: game.php");
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,8 +14,6 @@
 			$conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);
 
 			mysqli_select_db($conn, "db_sumus");
-
-
 
 //Check login
 			$queryusername = test_input($_POST["username"]);
@@ -49,8 +26,6 @@
 				die();
 			}
 			$row = mysqli_fetch_assoc($result);
-
-
 
 //Save Player Var if login = true
 			if (mysqli_num_rows($result) >=1){	

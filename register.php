@@ -1,17 +1,4 @@
 <?php 
-	//Login
-	//	CREATE DATABASE db_sumus;
-	//CREATE TABLE users(
-	//	userID INT PRIMARY KEY,
-	//    username VARCHAR(16),
-	//    pass VARCHAR(25),
-	//    email VARCHAR (60),
-	//    confCode INT,
-	//    verified INT,
-	//    avatarID INT
-	//);
-
-
 	session_start();
 	if (!isset($_SESSION["login"])) {
 		$_SESSION["login"] = false;
@@ -39,7 +26,6 @@
 			}
 			
 
-
 			mysqli_free_result($result);
 			$userResult = mysqli_query($conn, 'INSERT INTO users (username, pass, email, confCode, verified, avatarID) VALUES ("'.$queryusername.'", "'.md5($querypassword).'", "'.$queryemail.'", '.rand(1000,9999).', 1, 1)');
 			if (!$userResult) {
@@ -62,9 +48,6 @@
 				die(); //error page here
 			}
 			mysqli_free_result($resultID);
-
-
-
 
 
 			//INSERT REQUIRED INFO
