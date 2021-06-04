@@ -4,7 +4,8 @@
 if (session_status()==1) {
 	session_start();
 }
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login"]) ||!isset($_SESSION["userID"])||!isset($_GET["isGame"])) {
+	header("Location:login.php");
 	die("You must log in first to perform this action.");
 }
 include "globals.php";

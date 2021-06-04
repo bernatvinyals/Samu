@@ -3,6 +3,7 @@
 //Checks if Login
 session_start();
 if (!isset($_SESSION["login"]) || !isset($_GET["id"])) {
+	header("Location:login.php");
 	die("You must log in first to perform this action.");
 }
 //Connects to Database

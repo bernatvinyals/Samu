@@ -3,6 +3,11 @@
 	if (!isset($_SESSION["login"])) {
 		$_SESSION["login"] = false;
 	}
+
+	if ($_SESSION["login"] == true) {
+		header("Location: game.php");
+	}
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"])) {
 			include "globals.php";

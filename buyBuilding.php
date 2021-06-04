@@ -1,7 +1,16 @@
 <?php 
-session_start();
+if (session_status()==1) {
+	session_start();
+}
 if (!isset($_SESSION["login"])) {
+	if (!isset($_GET["id"])||!isset($_GET["pos"])) {
+		header("Location:login.php");
+	}
 	die("You must log in first to perform this action.");
+}
+if (!isset($_GET["id"])||!isset($_GET["pos"])) {
+	header("Location:login.php");
+	die();
 }
 include "globals.php";
 $conn = mysqli_connect($SERVER, $USERNAME, $PASSWORD);

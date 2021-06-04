@@ -105,7 +105,7 @@ function upateResources() {
 			progressBarPercentage = 0;
 		}
 	};
-	xhttp.open("GET", "updateResources.php", true);
+	xhttp.open("GET", "updateResources.php?isGame=1", true);
 	xhttp.send();
 }
 
